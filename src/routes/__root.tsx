@@ -1,5 +1,4 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import styled from "styled-components";
 
 export const Route = createRootRoute({
@@ -8,7 +7,6 @@ export const Route = createRootRoute({
       <StyledNav>
         <StyledLink to="/advent-of-code-2024">Home</StyledLink>{" "}
         <StyledLink to="/advent-of-code-2024/day-one">Day 1</StyledLink>
-        <TanStackRouterDevtools />
       </StyledNav>
       <MainContent>
         <Outlet />
