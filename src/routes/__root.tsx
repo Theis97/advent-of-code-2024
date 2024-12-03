@@ -7,6 +7,7 @@ export const Route = createRootRoute({
       <StyledNav>
         <StyledLink to="/advent-of-code-2024">Home</StyledLink>{" "}
         <StyledLink to="/advent-of-code-2024/day-one">Day 1</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-two">Day 2</StyledLink>
       </StyledNav>
       <MainContent>
         <Outlet />
@@ -20,7 +21,7 @@ const MainContent = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  margin-right: 10px;
+  margin: 10px;
   padding: 2px;
   text-decoration: none;
 `;
@@ -28,6 +29,7 @@ const StyledLink = styled(Link)`
 const StyledNav = styled.nav`
   display: flex;
   flex-direction: column;
+  min-width: 200px;
 `;
 
 const StyledDiv = styled.div`
