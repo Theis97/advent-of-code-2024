@@ -50,7 +50,6 @@ function DayOne() {
 
             reader.onload = function () {
               if (typeof reader.result === "string") {
-                console.log(reader.result);
                 setInput(reader.result);
               }
             };
