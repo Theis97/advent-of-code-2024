@@ -1,8 +1,8 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createLazyFileRoute("/advent-of-code-2024/")({
+export const Route = createFileRoute('/advent-of-code-2024/')({
   component: Index,
-});
+})
 
 function Index() {
   return (
@@ -14,5 +14,5 @@ function Index() {
         have the time!
       </p>
     </div>
-  );
+  )
 }
