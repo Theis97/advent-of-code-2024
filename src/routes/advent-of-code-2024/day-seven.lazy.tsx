@@ -87,7 +87,8 @@ function DaySeven() {
 
   return (
     <div>
-      <label>Day 7 input: </label>
+      <h2>Day 7</h2>
+      <label>Input: </label>
       <input
         type="file"
         onChange={(e) => {
