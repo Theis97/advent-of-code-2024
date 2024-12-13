@@ -15,6 +15,8 @@ export const Route = createRootRoute({
         <StyledLink to="/advent-of-code-2024/day-seven">Day 7</StyledLink>
         <StyledLink to="/advent-of-code-2024/day-eight">Day 8</StyledLink>
         <StyledLink to="/advent-of-code-2024/day-nine">Day 9</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-ten">Day 10</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-eleven">Day 11</StyledLink>
       </StyledNav>
       <MainContent>
         <Outlet />
