@@ -6,17 +6,17 @@ export const Route = createRootRoute({
     <StyledDiv>
       <StyledNav>
         <StyledLink to="/advent-of-code-2024">Home</StyledLink>{" "}
-        <StyledLink to="/advent-of-code-2024/day-one">Day 1</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-two">Day 2</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-three">Day 3</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-four">Day 4</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-five">Day 5</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-six">Day 6</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-seven">Day 7</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-eight">Day 8</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-nine">Day 9</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-ten">Day 10</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-eleven">Day 11</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-1">Day 1</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-2">Day 2</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-3">Day 3</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-4">Day 4</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-5">Day 5</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-6">Day 6</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-7">Day 7</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-8">Day 8</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-9">Day 9</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-10">Day 10</StyledLink>
+        <StyledLink to="/advent-of-code-2024/day-11">Day 11</StyledLink>
       </StyledNav>
       <MainContent>
         <Outlet />
