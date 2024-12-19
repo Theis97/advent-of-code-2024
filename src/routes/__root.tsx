@@ -2,32 +2,30 @@ import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import styled from "styled-components";
 
 export const Route = createRootRoute({
-  component: () => (
-    <StyledDiv>
-      <StyledNav>
-        <StyledLink to="/advent-of-code-2024">Home</StyledLink>{" "}
-        <StyledLink to="/advent-of-code-2024/day-1">Day 1</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-2">Day 2</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-3">Day 3</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-4">Day 4</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-5">Day 5</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-6">Day 6</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-7">Day 7</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-8">Day 8</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-9">Day 9</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-10">Day 10</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-11">Day 11</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-12">Day 12</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-13">Day 13</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-14">Day 14</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-15">Day 15</StyledLink>
-        <StyledLink to="/advent-of-code-2024/day-16">Day 16</StyledLink>
-      </StyledNav>
-      <MainContent>
-        <Outlet />
-      </MainContent>
-    </StyledDiv>
-  ),
+  component: () => {
+    let links: JSX.Element[] = [];
+    for (let i = 1; i <= 19; i++) {
+      links.push(
+        <StyledLink to={`/advent-of-code-2024/day-${i}`} key={i}>
+          Day {i}
+        </StyledLink>
+      );
+    }
+
+    return (
+      <StyledDiv>
+        <StyledNav>
+          <StyledLink activeOptions={{ exact: true }} to="/advent-of-code-2024">
+            Home
+          </StyledLink>
+          {links}
+        </StyledNav>
+        <MainContent>
+          <Outlet />
+        </MainContent>
+      </StyledDiv>
+    );
+  },
 });
 
 const MainContent = styled.div`
@@ -35,10 +33,18 @@ const MainContent = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  margin: 5px 10px;
-  padding: 2px;
+  padding: 5px 10px;
+  color: white;
   text-decoration: none;
   font-size: larger;
+
+  &:hover {
+    background-color: #330000;
+  }
+
+  &.active {
+    background-color: #660000;
+  }
 `;
 
 const StyledNav = styled.nav`

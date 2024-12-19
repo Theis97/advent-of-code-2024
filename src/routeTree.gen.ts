@@ -41,6 +41,15 @@ const AdventOfCode2024Day3LazyImport = createFileRoute(
 const AdventOfCode2024Day2LazyImport = createFileRoute(
   '/advent-of-code-2024/day-2',
 )()
+const AdventOfCode2024Day19LazyImport = createFileRoute(
+  '/advent-of-code-2024/day-19',
+)()
+const AdventOfCode2024Day18LazyImport = createFileRoute(
+  '/advent-of-code-2024/day-18',
+)()
+const AdventOfCode2024Day17LazyImport = createFileRoute(
+  '/advent-of-code-2024/day-17',
+)()
 const AdventOfCode2024Day16LazyImport = createFileRoute(
   '/advent-of-code-2024/day-16',
 )()
@@ -136,6 +145,30 @@ const AdventOfCode2024Day2LazyRoute = AdventOfCode2024Day2LazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
   import('./routes/advent-of-code-2024/day-2.lazy').then((d) => d.Route),
+)
+
+const AdventOfCode2024Day19LazyRoute = AdventOfCode2024Day19LazyImport.update({
+  id: '/advent-of-code-2024/day-19',
+  path: '/advent-of-code-2024/day-19',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/advent-of-code-2024/day-19.lazy').then((d) => d.Route),
+)
+
+const AdventOfCode2024Day18LazyRoute = AdventOfCode2024Day18LazyImport.update({
+  id: '/advent-of-code-2024/day-18',
+  path: '/advent-of-code-2024/day-18',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/advent-of-code-2024/day-18.lazy').then((d) => d.Route),
+)
+
+const AdventOfCode2024Day17LazyRoute = AdventOfCode2024Day17LazyImport.update({
+  id: '/advent-of-code-2024/day-17',
+  path: '/advent-of-code-2024/day-17',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/advent-of-code-2024/day-17.lazy').then((d) => d.Route),
 )
 
 const AdventOfCode2024Day16LazyRoute = AdventOfCode2024Day16LazyImport.update({
@@ -262,6 +295,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdventOfCode2024Day16LazyImport
       parentRoute: typeof rootRoute
     }
+    '/advent-of-code-2024/day-17': {
+      id: '/advent-of-code-2024/day-17'
+      path: '/advent-of-code-2024/day-17'
+      fullPath: '/advent-of-code-2024/day-17'
+      preLoaderRoute: typeof AdventOfCode2024Day17LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/advent-of-code-2024/day-18': {
+      id: '/advent-of-code-2024/day-18'
+      path: '/advent-of-code-2024/day-18'
+      fullPath: '/advent-of-code-2024/day-18'
+      preLoaderRoute: typeof AdventOfCode2024Day18LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/advent-of-code-2024/day-19': {
+      id: '/advent-of-code-2024/day-19'
+      path: '/advent-of-code-2024/day-19'
+      fullPath: '/advent-of-code-2024/day-19'
+      preLoaderRoute: typeof AdventOfCode2024Day19LazyImport
+      parentRoute: typeof rootRoute
+    }
     '/advent-of-code-2024/day-2': {
       id: '/advent-of-code-2024/day-2'
       path: '/advent-of-code-2024/day-2'
@@ -339,6 +393,9 @@ export interface FileRoutesByFullPath {
   '/advent-of-code-2024/day-14': typeof AdventOfCode2024Day14LazyRoute
   '/advent-of-code-2024/day-15': typeof AdventOfCode2024Day15LazyRoute
   '/advent-of-code-2024/day-16': typeof AdventOfCode2024Day16LazyRoute
+  '/advent-of-code-2024/day-17': typeof AdventOfCode2024Day17LazyRoute
+  '/advent-of-code-2024/day-18': typeof AdventOfCode2024Day18LazyRoute
+  '/advent-of-code-2024/day-19': typeof AdventOfCode2024Day19LazyRoute
   '/advent-of-code-2024/day-2': typeof AdventOfCode2024Day2LazyRoute
   '/advent-of-code-2024/day-3': typeof AdventOfCode2024Day3LazyRoute
   '/advent-of-code-2024/day-4': typeof AdventOfCode2024Day4LazyRoute
@@ -359,6 +416,9 @@ export interface FileRoutesByTo {
   '/advent-of-code-2024/day-14': typeof AdventOfCode2024Day14LazyRoute
   '/advent-of-code-2024/day-15': typeof AdventOfCode2024Day15LazyRoute
   '/advent-of-code-2024/day-16': typeof AdventOfCode2024Day16LazyRoute
+  '/advent-of-code-2024/day-17': typeof AdventOfCode2024Day17LazyRoute
+  '/advent-of-code-2024/day-18': typeof AdventOfCode2024Day18LazyRoute
+  '/advent-of-code-2024/day-19': typeof AdventOfCode2024Day19LazyRoute
   '/advent-of-code-2024/day-2': typeof AdventOfCode2024Day2LazyRoute
   '/advent-of-code-2024/day-3': typeof AdventOfCode2024Day3LazyRoute
   '/advent-of-code-2024/day-4': typeof AdventOfCode2024Day4LazyRoute
@@ -380,6 +440,9 @@ export interface FileRoutesById {
   '/advent-of-code-2024/day-14': typeof AdventOfCode2024Day14LazyRoute
   '/advent-of-code-2024/day-15': typeof AdventOfCode2024Day15LazyRoute
   '/advent-of-code-2024/day-16': typeof AdventOfCode2024Day16LazyRoute
+  '/advent-of-code-2024/day-17': typeof AdventOfCode2024Day17LazyRoute
+  '/advent-of-code-2024/day-18': typeof AdventOfCode2024Day18LazyRoute
+  '/advent-of-code-2024/day-19': typeof AdventOfCode2024Day19LazyRoute
   '/advent-of-code-2024/day-2': typeof AdventOfCode2024Day2LazyRoute
   '/advent-of-code-2024/day-3': typeof AdventOfCode2024Day3LazyRoute
   '/advent-of-code-2024/day-4': typeof AdventOfCode2024Day4LazyRoute
@@ -402,6 +465,9 @@ export interface FileRouteTypes {
     | '/advent-of-code-2024/day-14'
     | '/advent-of-code-2024/day-15'
     | '/advent-of-code-2024/day-16'
+    | '/advent-of-code-2024/day-17'
+    | '/advent-of-code-2024/day-18'
+    | '/advent-of-code-2024/day-19'
     | '/advent-of-code-2024/day-2'
     | '/advent-of-code-2024/day-3'
     | '/advent-of-code-2024/day-4'
@@ -421,6 +487,9 @@ export interface FileRouteTypes {
     | '/advent-of-code-2024/day-14'
     | '/advent-of-code-2024/day-15'
     | '/advent-of-code-2024/day-16'
+    | '/advent-of-code-2024/day-17'
+    | '/advent-of-code-2024/day-18'
+    | '/advent-of-code-2024/day-19'
     | '/advent-of-code-2024/day-2'
     | '/advent-of-code-2024/day-3'
     | '/advent-of-code-2024/day-4'
@@ -440,6 +509,9 @@ export interface FileRouteTypes {
     | '/advent-of-code-2024/day-14'
     | '/advent-of-code-2024/day-15'
     | '/advent-of-code-2024/day-16'
+    | '/advent-of-code-2024/day-17'
+    | '/advent-of-code-2024/day-18'
+    | '/advent-of-code-2024/day-19'
     | '/advent-of-code-2024/day-2'
     | '/advent-of-code-2024/day-3'
     | '/advent-of-code-2024/day-4'
@@ -461,6 +533,9 @@ export interface RootRouteChildren {
   AdventOfCode2024Day14LazyRoute: typeof AdventOfCode2024Day14LazyRoute
   AdventOfCode2024Day15LazyRoute: typeof AdventOfCode2024Day15LazyRoute
   AdventOfCode2024Day16LazyRoute: typeof AdventOfCode2024Day16LazyRoute
+  AdventOfCode2024Day17LazyRoute: typeof AdventOfCode2024Day17LazyRoute
+  AdventOfCode2024Day18LazyRoute: typeof AdventOfCode2024Day18LazyRoute
+  AdventOfCode2024Day19LazyRoute: typeof AdventOfCode2024Day19LazyRoute
   AdventOfCode2024Day2LazyRoute: typeof AdventOfCode2024Day2LazyRoute
   AdventOfCode2024Day3LazyRoute: typeof AdventOfCode2024Day3LazyRoute
   AdventOfCode2024Day4LazyRoute: typeof AdventOfCode2024Day4LazyRoute
@@ -481,6 +556,9 @@ const rootRouteChildren: RootRouteChildren = {
   AdventOfCode2024Day14LazyRoute: AdventOfCode2024Day14LazyRoute,
   AdventOfCode2024Day15LazyRoute: AdventOfCode2024Day15LazyRoute,
   AdventOfCode2024Day16LazyRoute: AdventOfCode2024Day16LazyRoute,
+  AdventOfCode2024Day17LazyRoute: AdventOfCode2024Day17LazyRoute,
+  AdventOfCode2024Day18LazyRoute: AdventOfCode2024Day18LazyRoute,
+  AdventOfCode2024Day19LazyRoute: AdventOfCode2024Day19LazyRoute,
   AdventOfCode2024Day2LazyRoute: AdventOfCode2024Day2LazyRoute,
   AdventOfCode2024Day3LazyRoute: AdventOfCode2024Day3LazyRoute,
   AdventOfCode2024Day4LazyRoute: AdventOfCode2024Day4LazyRoute,
@@ -510,6 +588,9 @@ export const routeTree = rootRoute
         "/advent-of-code-2024/day-14",
         "/advent-of-code-2024/day-15",
         "/advent-of-code-2024/day-16",
+        "/advent-of-code-2024/day-17",
+        "/advent-of-code-2024/day-18",
+        "/advent-of-code-2024/day-19",
         "/advent-of-code-2024/day-2",
         "/advent-of-code-2024/day-3",
         "/advent-of-code-2024/day-4",
@@ -544,6 +625,15 @@ export const routeTree = rootRoute
     },
     "/advent-of-code-2024/day-16": {
       "filePath": "advent-of-code-2024/day-16.lazy.tsx"
+    },
+    "/advent-of-code-2024/day-17": {
+      "filePath": "advent-of-code-2024/day-17.lazy.tsx"
+    },
+    "/advent-of-code-2024/day-18": {
+      "filePath": "advent-of-code-2024/day-18.lazy.tsx"
+    },
+    "/advent-of-code-2024/day-19": {
+      "filePath": "advent-of-code-2024/day-19.lazy.tsx"
     },
     "/advent-of-code-2024/day-2": {
       "filePath": "advent-of-code-2024/day-2.lazy.tsx"
