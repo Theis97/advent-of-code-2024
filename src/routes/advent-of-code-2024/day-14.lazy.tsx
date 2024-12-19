@@ -9,6 +9,7 @@ function DayFourteen() {
   const [input, setInput] = useState("");
 
   const inputLines = input.trim().split("\n");
+  console.log(inputLines);
 
   return (
     <div>
