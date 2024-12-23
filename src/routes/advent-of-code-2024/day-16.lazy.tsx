@@ -66,21 +66,87 @@ function DaySixteen() {
         ]);
       }
 
-      if (map[tile[0] - 1][tile[0]] !== "#") {
+      if (map[tile[0] - 1][tile[1]] !== "#") {
         // Tile above is open
-      } else if (map[tile[0]][tile[0] + 1] !== "#") {
+        const neighborTile: [number, number] = [tile[0] - 1, tile[1]];
+        if (
+          !nextTilesToExplore.some(
+            (t) => t[0] === neighborTile[0] && t[1] === neighborTile[1]
+          ) &&
+          !exploredTiles.some(
+            (t) => t[0] === neighborTile[0] && t[1] === neighborTile[1]
+          )
+        ) {
+          nextTilesToExplore.push(neighborTile);
+        }
+        let edges = graph.get({ coord: tile, facing: Direction.Up });
+        edges &&
+          edges.push({
+            node: { coord: neighborTile, facing: Direction.Up },
+            weight: 1,
+          });
+      } else if (map[tile[0]][tile[1] + 1] !== "#") {
         // Tile to the right is open
-      } else if (map[tile[0] + 1][tile[0]] !== "#") {
+        const neighborTile: [number, number] = [tile[0], tile[1] + 1];
+        if (
+          !nextTilesToExplore.some(
+            (t) => t[0] === neighborTile[0] && t[1] === neighborTile[1]
+          ) &&
+          !exploredTiles.some(
+            (t) => t[0] === neighborTile[0] && t[1] === neighborTile[1]
+          )
+        ) {
+          nextTilesToExplore.push(neighborTile);
+        }
+        let edges = graph.get({ coord: tile, facing: Direction.Right });
+        edges &&
+          edges.push({
+            node: { coord: neighborTile, facing: Direction.Right },
+            weight: 1,
+          });
+      } else if (map[tile[0] + 1][tile[1]] !== "#") {
         // Tile below is open
-      } else if (map[tile[0]][tile[0] + 1] !== "#") {
+        const neighborTile: [number, number] = [tile[0] + 1, tile[1]];
+        if (
+          !nextTilesToExplore.some(
+            (t) => t[0] === neighborTile[0] && t[1] === neighborTile[1]
+          ) &&
+          !exploredTiles.some(
+            (t) => t[0] === neighborTile[0] && t[1] === neighborTile[1]
+          )
+        ) {
+          nextTilesToExplore.push(neighborTile);
+        }
+        let edges = graph.get({ coord: tile, facing: Direction.Down });
+        edges &&
+          edges.push({
+            node: { coord: neighborTile, facing: Direction.Down },
+            weight: 1,
+          });
+      } else if (map[tile[0]][tile[1] - 1] !== "#") {
         // Tile to the left is open
+        const neighborTile: [number, number] = [tile[0], tile[1] - 1];
+        if (
+          !nextTilesToExplore.some(
+            (t) => t[0] === neighborTile[0] && t[1] === neighborTile[1]
+          ) &&
+          !exploredTiles.some(
+            (t) => t[0] === neighborTile[0] && t[1] === neighborTile[1]
+          )
+        ) {
+          nextTilesToExplore.push(neighborTile);
+        }
+        let edges = graph.get({ coord: tile, facing: Direction.Left });
+        edges &&
+          edges.push({
+            node: { coord: neighborTile, facing: Direction.Left },
+            weight: 1,
+          });
       }
 
+      tilesToExplore = nextTilesToExplore;
       exploredTiles.push(tile);
     });
-
-    // TODO: Actually finish implementing this loop
-    break;
   }
 
   return (
