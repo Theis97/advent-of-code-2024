@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Route = createRootRoute({
   component: () => {
     let links: JSX.Element[] = [];
-    for (let i = 1; i <= 21; i++) {
+    for (let i = 1; i <= 25; i++) {
       links.push(
         <StyledLink to={`/advent-of-code-2024/day-${i}`} key={i}>
           Day {i}
@@ -52,7 +52,8 @@ const StyledNav = styled.nav`
   display: flex;
   flex-direction: column;
   min-width: 200px;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
 `;
 
 const StyledDiv = styled.div`
