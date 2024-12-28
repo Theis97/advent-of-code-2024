@@ -54,13 +54,13 @@ function DaySixteen() {
   // edges are weighted based on the score incurred by moving from one position to another.
   let exploredTiles: [number, number][] = [];
   let tilesToExplore: [number, number][] = [startTile];
-  let graph = new Map<Node, Edge[]>();
+  let graph = new Map<string, Edge[]>();
   while (tilesToExplore.length > 0 && startTile[0] !== -1) {
     let nextTilesToExplore: [number, number][] = [];
     tilesToExplore.forEach((tile) => {
       // create 4 nodes for each direction you can face on this tile
       for (let i = 0; i < 4; i++) {
-        graph.set({ coord: tile, facing: i }, [
+        graph.set(JSON.stringify({ coord: tile, facing: i }), [
           { node: { coord: tile, facing: turn(i, true) }, weight: 1000 },
           { node: { coord: tile, facing: turn(i, false) }, weight: 1000 },
         ]);
@@ -79,13 +79,16 @@ function DaySixteen() {
         ) {
           nextTilesToExplore.push(neighborTile);
         }
-        let edges = graph.get({ coord: tile, facing: Direction.Up });
+        let edges = graph.get(
+          JSON.stringify({ coord: tile, facing: Direction.Up })
+        );
         edges &&
           edges.push({
             node: { coord: neighborTile, facing: Direction.Up },
             weight: 1,
           });
-      } else if (map[tile[0]][tile[1] + 1] !== "#") {
+      }
+      if (map[tile[0]][tile[1] + 1] !== "#") {
         // Tile to the right is open
         const neighborTile: [number, number] = [tile[0], tile[1] + 1];
         if (
@@ -98,13 +101,16 @@ function DaySixteen() {
         ) {
           nextTilesToExplore.push(neighborTile);
         }
-        let edges = graph.get({ coord: tile, facing: Direction.Right });
+        let edges = graph.get(
+          JSON.stringify({ coord: tile, facing: Direction.Right })
+        );
         edges &&
           edges.push({
             node: { coord: neighborTile, facing: Direction.Right },
             weight: 1,
           });
-      } else if (map[tile[0] + 1][tile[1]] !== "#") {
+      }
+      if (map[tile[0] + 1][tile[1]] !== "#") {
         // Tile below is open
         const neighborTile: [number, number] = [tile[0] + 1, tile[1]];
         if (
@@ -117,13 +123,16 @@ function DaySixteen() {
         ) {
           nextTilesToExplore.push(neighborTile);
         }
-        let edges = graph.get({ coord: tile, facing: Direction.Down });
+        let edges = graph.get(
+          JSON.stringify({ coord: tile, facing: Direction.Down })
+        );
         edges &&
           edges.push({
             node: { coord: neighborTile, facing: Direction.Down },
             weight: 1,
           });
-      } else if (map[tile[0]][tile[1] - 1] !== "#") {
+      }
+      if (map[tile[0]][tile[1] - 1] !== "#") {
         // Tile to the left is open
         const neighborTile: [number, number] = [tile[0], tile[1] - 1];
         if (
@@ -136,7 +145,9 @@ function DaySixteen() {
         ) {
           nextTilesToExplore.push(neighborTile);
         }
-        let edges = graph.get({ coord: tile, facing: Direction.Left });
+        let edges = graph.get(
+          JSON.stringify({ coord: tile, facing: Direction.Left })
+        );
         edges &&
           edges.push({
             node: { coord: neighborTile, facing: Direction.Left },
