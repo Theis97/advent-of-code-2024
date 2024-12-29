@@ -30,6 +30,16 @@ type Edge = {
   weight: number;
 };
 
+const nodeToKey = (node: Node) => {
+  return `${node.coord[0]},${node.coord[1]},${node.facing}`;
+};
+
+// Assumes nodeToKey was used to form the key string
+const keyToNode = (key: string): Node => {
+  const values = key.split(",").map((str) => parseInt(str));
+  return { coord: [values[0], values[1]], facing: values[2] };
+};
+
 function DaySixteen() {
   const [input, setInput] = useState("");
 
@@ -60,7 +70,7 @@ function DaySixteen() {
     tilesToExplore.forEach((tile) => {
       // create 4 nodes for each direction you can face on this tile
       for (let i = 0; i < 4; i++) {
-        graph.set(JSON.stringify({ coord: tile, facing: i }), [
+        graph.set(nodeToKey({ coord: tile, facing: i }), [
           { node: { coord: tile, facing: turn(i, true) }, weight: 1000 },
           { node: { coord: tile, facing: turn(i, false) }, weight: 1000 },
         ]);
@@ -79,9 +89,7 @@ function DaySixteen() {
         ) {
           nextTilesToExplore.push(neighborTile);
         }
-        let edges = graph.get(
-          JSON.stringify({ coord: tile, facing: Direction.Up })
-        );
+        let edges = graph.get(nodeToKey({ coord: tile, facing: Direction.Up }));
         edges &&
           edges.push({
             node: { coord: neighborTile, facing: Direction.Up },
@@ -102,7 +110,7 @@ function DaySixteen() {
           nextTilesToExplore.push(neighborTile);
         }
         let edges = graph.get(
-          JSON.stringify({ coord: tile, facing: Direction.Right })
+          nodeToKey({ coord: tile, facing: Direction.Right })
         );
         edges &&
           edges.push({
@@ -124,7 +132,7 @@ function DaySixteen() {
           nextTilesToExplore.push(neighborTile);
         }
         let edges = graph.get(
-          JSON.stringify({ coord: tile, facing: Direction.Down })
+          nodeToKey({ coord: tile, facing: Direction.Down })
         );
         edges &&
           edges.push({
@@ -146,7 +154,7 @@ function DaySixteen() {
           nextTilesToExplore.push(neighborTile);
         }
         let edges = graph.get(
-          JSON.stringify({ coord: tile, facing: Direction.Left })
+          nodeToKey({ coord: tile, facing: Direction.Left })
         );
         edges &&
           edges.push({
