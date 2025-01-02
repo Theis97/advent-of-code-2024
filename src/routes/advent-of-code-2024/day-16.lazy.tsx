@@ -1,6 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { removeAt } from "../../tools/array";
+import styled, { css } from "styled-components";
 
 export const Route = createLazyFileRoute("/advent-of-code-2024/day-16")({
   component: DaySixteen,
@@ -237,29 +238,65 @@ function DaySixteen() {
   }
 
   return (
-    <div>
+    <StyledDiv>
       <h2>Day 16</h2>
-      <label>Input: </label>
-      <input
-        type="file"
-        onChange={(e) => {
-          const reader = new FileReader();
-          if (e.target.files) {
-            reader.readAsText(e.target.files[0]);
+      <div>
+        <label>Input: </label>
+        <input
+          type="file"
+          onChange={(e) => {
+            const reader = new FileReader();
+            if (e.target.files) {
+              reader.readAsText(e.target.files[0]);
 
-            reader.onload = function () {
-              if (typeof reader.result === "string") {
-                setInput(reader.result);
+              reader.onload = function () {
+                if (typeof reader.result === "string") {
+                  setInput(reader.result);
+                }
+              };
+
+              reader.onerror = function () {
+                console.log(reader.error);
+              };
+            }
+          }}
+        />
+        {lowestScore}
+      </div>
+      <Maze>
+        {map.map((row) => (
+          <div>
+            {row.map((col) => {
+              if (col === "#") {
+                return <Tile wall />;
+              } else {
+                return <Tile />;
               }
-            };
-
-            reader.onerror = function () {
-              console.log(reader.error);
-            };
-          }
-        }}
-      />
-      {lowestScore}
-    </div>
+            })}
+          </div>
+        ))}
+      </Maze>
+    </StyledDiv>
   );
 }
+
+const StyledDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Maze = styled.div`
+  display: flex;
+`;
+
+const Tile = styled.div<{ wall?: boolean }>`
+  width: 5px;
+  height: 5px;
+  background-color: white;
+
+  ${(props) =>
+    props.wall &&
+    css`
+      background-color: black;
+    `}
+`;
