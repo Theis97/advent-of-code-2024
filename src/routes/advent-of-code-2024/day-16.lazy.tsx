@@ -269,6 +269,10 @@ function DaySixteen() {
             {row.map((col) => {
               if (col === "#") {
                 return <Tile wall />;
+              } else if (col === "S") {
+                return <Tile start />;
+              } else if (col === "E") {
+                return <Tile end />;
               } else {
                 return <Tile />;
               }
@@ -289,14 +293,24 @@ const Maze = styled.div`
   display: flex;
 `;
 
-const Tile = styled.div<{ wall?: boolean }>`
+const Tile = styled.div<{ wall?: boolean; start?: boolean; end?: boolean }>`
   width: 5px;
   height: 5px;
   background-color: white;
 
-  ${(props) =>
-    props.wall &&
-    css`
-      background-color: black;
-    `}
+  ${(props) => {
+    if (props.wall) {
+      return css`
+        background-color: black;
+      `;
+    } else if (props.start) {
+      return css`
+        background-color: blue;
+      `;
+    } else if (props.end) {
+      return css`
+        background-color: red;
+      `;
+    }
+  }}
 `;
