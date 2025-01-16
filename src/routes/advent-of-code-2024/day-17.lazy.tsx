@@ -93,7 +93,6 @@ function DaySeventeen() {
 
   const inputLines = input.trim().split("\n");
   let output: number[] = [];
-  let partTwoAnswer = 0;
   if (inputLines.length > 1) {
     const regA = parseInt(inputLines[0].split(":")[1].trim());
     const regB = parseInt(inputLines[1].split(":")[1].trim());
@@ -108,32 +107,35 @@ function DaySeventeen() {
     <div>
       <h2>Day 17</h2>
       <Flex>
-        <div>
-          <label>Input: </label>
-          <input
-            type="file"
-            onChange={(e) => {
-              const reader = new FileReader();
-              if (e.target.files) {
-                reader.readAsText(e.target.files[0]);
+        <ColumnFlex>
+          <div>
+            <label>Input: </label>
+            <input
+              type="file"
+              onChange={(e) => {
+                const reader = new FileReader();
+                if (e.target.files) {
+                  reader.readAsText(e.target.files[0]);
 
-                reader.onload = function () {
-                  if (typeof reader.result === "string") {
-                    setInput(reader.result);
-                  }
-                };
+                  reader.onload = function () {
+                    if (typeof reader.result === "string") {
+                      setInput(reader.result);
+                    }
+                  };
 
-                reader.onerror = function () {
-                  console.log(reader.error);
-                };
-              }
-            }}
-          />
-          Program output: {output.join(",")}, Part 2 Answer: {partTwoAnswer}
-        </div>
+                  reader.onerror = function () {
+                    console.log(reader.error);
+                  };
+                }
+              }}
+            />
+          </div>
+          <div>Program output: {output.join(",")} </div>
+          <div>Part 2 Answer: Coming Soon...</div>
+        </ColumnFlex>
         <div>
-          <CustomProgramSubmission>
-            <div>
+          <ColumnFlex>
+            <CustomInput>
               <label>Register A: </label>
               <input
                 type="number"
@@ -141,8 +143,8 @@ function DaySeventeen() {
                   setCustomRegA(parseInt(e.target.value));
                 }}
               />
-            </div>
-            <div>
+            </CustomInput>
+            <CustomInput>
               <label>Register B: </label>
               <input
                 type="number"
@@ -150,8 +152,8 @@ function DaySeventeen() {
                   setCustomRegB(parseInt(e.target.value));
                 }}
               />
-            </div>
-            <div>
+            </CustomInput>
+            <CustomInput>
               <label>Register C: </label>
               <input
                 type="number"
@@ -159,8 +161,8 @@ function DaySeventeen() {
                   setCustomRegC(parseInt(e.target.value));
                 }}
               />
-            </div>
-            <div>
+            </CustomInput>
+            <CustomInput>
               <label>Program: </label>
               <input
                 type="text"
@@ -168,7 +170,7 @@ function DaySeventeen() {
                   setCustomProgram(e.target.value);
                 }}
               />
-            </div>
+            </CustomInput>
             <button
               onClick={() => {
                 const cleanedCustomProgram = customProgram.split(",");
@@ -184,7 +186,7 @@ function DaySeventeen() {
             >
               Submit
             </button>
-          </CustomProgramSubmission>
+          </ColumnFlex>
           <div>Output: {customProgramOutput.join(",")}</div>
         </div>
       </Flex>
@@ -200,7 +202,17 @@ const Flex = styled.div`
   }
 `;
 
-const CustomProgramSubmission = styled.div`
+const ColumnFlex = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const CustomInput = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+
+  label {
+    margin-right: 5px;
+  }
 `;
