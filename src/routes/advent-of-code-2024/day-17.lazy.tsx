@@ -1,87 +1,11 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import styled from "styled-components";
+import { run3BitProgram } from "../../common/day17";
 
 export const Route = createLazyFileRoute("/advent-of-code-2024/day-17")({
   component: DaySeventeen,
 });
-
-const runProgram = (
-  regAInit: number,
-  regBInit: number,
-  regCInit: number,
-  program: string[]
-) => {
-  let regA = regAInit;
-  let regB = regBInit;
-  let regC = regCInit;
-  let output: number[] = [];
-  let instructionPointer = 0;
-
-  while (instructionPointer >= 0 && instructionPointer < program.length - 1) {
-    const instruction = program[instructionPointer];
-    const literalOperand = parseInt(program[instructionPointer + 1]);
-
-    const comboOperand =
-      literalOperand === 4
-        ? regA
-        : literalOperand === 5
-          ? regB
-          : literalOperand === 6
-            ? regC
-            : literalOperand; // We're not worrying about reserved and invalid operands for now
-
-    switch (instruction) {
-      case "0":
-        regA = Math.floor(regA / 2 ** comboOperand);
-        instructionPointer += 2;
-        break;
-      case "1":
-        // bxl
-        regB = regB ^ literalOperand;
-        instructionPointer += 2;
-        break;
-      case "2":
-        // bst
-        regB = comboOperand % 8;
-        instructionPointer += 2;
-        break;
-      case "3":
-        // jnz
-        if (regA !== 0) {
-          instructionPointer = literalOperand;
-        } else {
-          instructionPointer += 2;
-        }
-        break;
-      case "4":
-        // bxc
-        regB = regB ^ regC;
-        instructionPointer += 2;
-        break;
-      case "5":
-        // out
-        output.push(comboOperand % 8);
-        instructionPointer += 2;
-        break;
-      case "6":
-        // bdv
-        regB = Math.floor(regA / 2 ** comboOperand);
-        instructionPointer += 2;
-        break;
-      case "7":
-        // cdv
-        regC = Math.floor(regA / 2 ** comboOperand);
-        instructionPointer += 2;
-        break;
-      default:
-        // We'll just ignore invalid opcodes for now
-        instructionPointer += 2;
-    }
-  }
-
-  return output;
-};
 
 function DaySeventeen() {
   const [input, setInput] = useState("");
@@ -90,6 +14,15 @@ function DaySeventeen() {
   const [customRegC, setCustomRegC] = useState(0);
   const [customProgram, setCustomProgram] = useState<string>("");
   const [customProgramOutput, setCustomProgramOutput] = useState<number[]>([]);
+  const [partTwoAnswer, setPartTwoAnswer] = useState(-1);
+
+  const partTwoWorker = new Worker(
+    new URL("../../webworkers/day-17-part-2.ts", import.meta.url),
+    { type: "module" }
+  );
+  partTwoWorker.onmessage = (e) => {
+    setPartTwoAnswer(e.data);
+  };
 
   const inputLines = input.trim().split("\n");
   let output: number[] = [];
@@ -100,7 +33,9 @@ function DaySeventeen() {
 
     const program = inputLines[4].split(":")[1].trim().split(",");
 
-    output = runProgram(regA, regB, regC, program);
+    output = run3BitProgram(regA, regB, regC, program);
+
+    partTwoWorker.postMessage({ regA: 0, regB, regC, program });
   }
 
   return (
@@ -131,7 +66,7 @@ function DaySeventeen() {
             />
           </div>
           <div>Program output: {output.join(",")} </div>
-          <div>Part 2 Answer: Coming Soon...</div>
+          <div>Part 2 Answer: {partTwoAnswer}</div>
         </ColumnFlex>
         <div>
           <ColumnFlex>
@@ -175,7 +110,7 @@ function DaySeventeen() {
               onClick={() => {
                 const cleanedCustomProgram = customProgram.split(",");
                 setCustomProgramOutput(
-                  runProgram(
+                  run3BitProgram(
                     customRegA,
                     customRegB,
                     customRegC,
