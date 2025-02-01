@@ -1,57 +1,58 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
+import { createLazyFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { removeAt } from "../../tools/array";
 
-export const Route = createLazyFileRoute('/advent-of-code-2024/day-2')({
+export const Route = createLazyFileRoute("/advent-of-code-2024/day-2")({
   component: DayTwo,
-})
+});
 
-type Trend = 'undetermined' | 'increasing' | 'decreasing'
+type Trend = "undetermined" | "increasing" | "decreasing";
 
 const reportIsSafe = (report: number[]) => {
-  let isSafe = true
-  let trend: Trend = 'undetermined'
+  let isSafe = true;
+  let trend: Trend = "undetermined";
   for (let i = 0; i < report.length - 1; i++) {
-    const difference = report[i] - report[i + 1]
+    const difference = report[i] - report[i + 1];
     if (Math.abs(difference) < 1 || Math.abs(difference) > 3) {
-      isSafe = false
+      isSafe = false;
     }
     if (i === 0) {
-      trend = difference > 0 ? 'decreasing' : 'increasing'
+      trend = difference > 0 ? "decreasing" : "increasing";
     } else {
-      const currentTrend: Trend = difference > 0 ? 'decreasing' : 'increasing'
+      const currentTrend: Trend = difference > 0 ? "decreasing" : "increasing";
       if (trend !== currentTrend) {
-        isSafe = false
+        isSafe = false;
       }
     }
   }
-  return isSafe
-}
+  return isSafe;
+};
 
 function DayTwo() {
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState("");
 
-  const inputLines = input.trim().split('\n')
+  const inputLines = input.trim().split("\n");
 
-  let safeReportCount = 0
-  let safeReportWithDampeningCount = 0
+  let safeReportCount = 0;
+  let safeReportWithDampeningCount = 0;
   inputLines.forEach((report) => {
     const levels = report
       .trim()
-      .split(' ')
-      .map((value) => parseInt(value))
+      .split(" ")
+      .map((value) => parseInt(value));
 
     if (reportIsSafe(levels)) {
-      safeReportCount += 1
+      safeReportCount += 1;
     } else {
       // Just try going through removing each level
       for (let i = 0; i < levels.length; i++) {
-        if (reportIsSafe(levels.slice(0, i).concat(levels.slice(i + 1)))) {
-          safeReportWithDampeningCount += 1
-          break
+        if (reportIsSafe(removeAt(levels, i))) {
+          safeReportWithDampeningCount += 1;
+          break;
         }
       }
     }
-  })
+  });
 
   return (
     <div>
@@ -60,24 +61,24 @@ function DayTwo() {
       <input
         type="file"
         onChange={(e) => {
-          const reader = new FileReader()
+          const reader = new FileReader();
           if (e.target.files) {
-            reader.readAsText(e.target.files[0])
+            reader.readAsText(e.target.files[0]);
 
             reader.onload = function () {
-              if (typeof reader.result === 'string') {
-                setInput(reader.result)
+              if (typeof reader.result === "string") {
+                setInput(reader.result);
               }
-            }
+            };
 
             reader.onerror = function () {
-              console.log(reader.error)
-            }
+              console.log(reader.error);
+            };
           }
         }}
       />
-      Safe reports: {safeReportCount}; Safe reports with damping:{' '}
+      Safe reports: {safeReportCount}; Safe reports with damping:{" "}
       {safeReportCount + safeReportWithDampeningCount}
     </div>
-  )
+  );
 }
